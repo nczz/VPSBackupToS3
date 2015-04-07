@@ -33,8 +33,8 @@
 6. 加入 crontab 每天凌晨進行備份
 	```
 	crontab -e
-	# add a line without '#'
-	# 0 2 * * * /usr/bin/python /path/to/S3backup/script/S3Backup.py > /path/to/backup.log 
+	# add the line without '#'
+	# 0 2 * * * /usr/bin/python /path/to/S3Backup.py > /path/to/backup.log 
 	```
 7. DONE, 剩下其他可能的問題大概都是檔案權限設定或是環境設置錯誤了
 
