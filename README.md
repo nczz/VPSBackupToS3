@@ -7,17 +7,20 @@
 使用流程
 
 1. 安裝 s3cmd & python-magic
+	
 	```
 	sudo apt-get update
 	sudo apt-get install s3cmd python-magic -y
 	```
+	
 2. 確保環境變數中已經有加入 `mysqldump` & `s3cmd`
 
 3. 已有AWS帳號並且創建過IAM的腳色，拿到 `Access Key` & `Secret Access Key`後設定 `s3cmd`
+	
 	```
 	s3cmd --configure
 	```
-
+	
 4. 抓下這個 repo，將 S3Backup.sample.py 更名為 S3Backup.py，並賦予執行權限、建立環境
 	```
 	cd path/to/repo
