@@ -8,9 +8,9 @@ backupfolderpath = '/PATH/TO/S3Backup'
 s3bucketpath = 's3://BUCKET/OBJECT'
 filestamp = time.strftime('%Y%m%d')
 count = open(backupfolderpath+"/script/count.txt", "r").read().strip()
-checkfiles = os.popen("ls %s/www | grep '%s'" % (backupfolderpath, filestamp)).readline() 
 days = 14 # 14D period
 counter = str(int(count)%days+1) 
+checkfiles = os.popen("ls %s/www | grep 'count-%s-*'" % (backupfolderpath, counter)).readline() 
 
 # MySQL DB infomation
 username = '==DBNAME=='
