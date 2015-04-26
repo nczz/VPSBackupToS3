@@ -37,11 +37,11 @@ databaselist.remove('information_schema\n')
 #... etc u know... again
 
 # remove old backup files
-os.popen("rm `ls %s/mysql/ | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
-os.popen("rm `ls %s/www/ | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+os.popen("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+os.popen("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
 # remove today's backup files (debug mode)
-os.popen("rm `ls %s/mysql/ | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
-os.popen("rm `ls %s/www/ | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
+os.popen("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
+os.popen("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
 
 for database in databaselist:
   database = database.strip()
