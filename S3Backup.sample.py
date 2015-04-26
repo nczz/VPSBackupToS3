@@ -54,7 +54,7 @@ for www in wwwdir:
   print "backing up www folder %s/%s" % (wwwpath, www)
   os.popen("tar JcpfP %s/www/count-%s-%s-%s.tar.bz2 %s/%s" % (backupfolderpath, counter, www, filestamp, wwwpath, www))
 
-  #update count.txt (S3Backup/script/count.txt)
-  os.popen("echo %s > %s/script/count.txt" % (str((int(count)+1)), backupfolderpath))
-  os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/www/ %s/www/" % (backupfolderpath, s3bucketpath))
-  os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/mysql/ %s/mysql/" % (backupfolderpath, s3bucketpath))
+#update count.txt (S3Backup/script/count.txt)
+os.popen("echo %s > %s/script/count.txt" % (str((int(count)+1)), backupfolderpath))
+os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/www/ %s/www/" % (backupfolderpath, s3bucketpath))
+os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/mysql/ %s/mysql/" % (backupfolderpath, s3bucketpath))
