@@ -37,24 +37,24 @@ databaselist.remove('information_schema\n')
 #... etc u know... again
 
 # remove old backup files
-os.popen("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
-os.popen("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+os.system("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+os.system("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
 # remove today's backup files (debug mode)
-os.popen("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
-os.popen("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
+os.system("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
+os.system("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
 
 for database in databaselist:
   database = database.strip()
   filename = "%s/mysql/count-%s-%s-%s.sql" % (backupfolderpath, counter, database, filestamp)
   print "Backing up %s" % (filename)
-  os.popen("mysqldump -u%s -p%s -h%s -e --opt -c %s | gzip -c -9 > %s.gz" % (username, password, hostname, database, filename))
+  os.system("mysqldump -u%s -p%s -h%s -e --opt -c %s | gzip -c -9 > %s.gz" % (username, password, hostname, database, filename))
   print ".. done"
 
 for www in wwwdir:
   print "backing up www folder %s/%s" % (wwwpath, www)
-  os.popen("tar JcpfP %s/www/count-%s-%s-%s.tar.bz2 %s/%s" % (backupfolderpath, counter, www, filestamp, wwwpath, www))
+  os.system("tar JcpfP %s/www/count-%s-%s-%s.tar.bz2 %s/%s --warning=no-file-changed" % (backupfolderpath, counter, www, filestamp, wwwpath, www))
 
 #update count.txt (S3Backup/script/count.txt)
-os.popen("echo %s > %s/script/count.txt" % (str((int(count)+1)), backupfolderpath))
-os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/www/ %s/www/" % (backupfolderpath, s3bucketpath))
-os.popen("s3cmd sync --delete-removed --reduced-redundancy --skip-existing %s/mysql/ %s/mysql/" % (backupfolderpath, s3bucketpath))
+os.system("echo %s > %s/script/count.txt" % (str((int(count)+1)), backupfolderpath))
+os.system("s3cmd sync --delete-removed --reduced-redundancy --skip-existing --disable-multipart %s/www/ %s/www/" % (backupfolderpath, s3bucketpath))
+os.system("s3cmd sync --delete-removed --reduced-redundancy --skip-existing --disable-multipart %s/mysql/ %s/mysql/" % (backupfolderpath, s3bucketpath))

@@ -45,7 +45,7 @@
 
 > 注意，此腳本僅在下面環境測試
 
-1. Ubuntu 14.04 64Bit
+1. Ubuntu 14.04 64Bit & Ubuntu 16.04
 2. [Python 2.7](https://docs.python.org/2.7/)
 3. Python-magic module
 4. [S3cmd](http://s3tools.org/s3cmd)
@@ -57,6 +57,7 @@
 V1.0 - init - 幾乎無防呆與設定項稍微整理過的第一版
 V1.5 - 重大更新，刪除過期失效備份機制錯誤
 V2.0 - 整理後發佈第二版
+V2.1 - 修正在Ubuntu 16.04下碰到莫名被執行終止的問題，把popen改成system操作並加上不分多檔上傳減少意外
 ```
 
 #### Copyright
