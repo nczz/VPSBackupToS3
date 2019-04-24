@@ -37,8 +37,10 @@ databaselist.remove('information_schema\n')
 #... etc u know... again
 
 # remove old backup files
-os.system("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
-os.system("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+#os.system("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+#os.system("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp_back))
+os.system("find %s/mysql/ -mindepth 1 -mtime +%s -delete" % (backupfolderpath,days))
+os.system("find %s/www/ -mindepth 1 -mtime +%s -delete" % (backupfolderpath,days))
 # remove today's backup files (debug mode)
 os.system("rm `ls -rt -d -1 %s/mysql/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
 os.system("rm `ls -rt -d -1 %s/www/* | grep '%s'` 2> /dev/null" % (backupfolderpath,filestamp))
